@@ -1,0 +1,193 @@
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        <img src="assets/Logo.png" />
+      </h1>
+      <!-- <h2 class="subtitle">
+        Invoice Generator
+      </h2> -->
+    </div>
+  </div>
+</section>
+
+<div class="container vertical-padding">
+  <div class="columns">
+    <div class="column is-12">
+      <div class="notification is-primary">
+        <button class="delete"></button>
+        <h4 class="title is-4">Make Free Invoices</h4>
+        You can use this invoice generator to generate clean concise invoices. just fill out the required fields preview the invoice and generate a clean clear pdf that you can send to your clients and companies.
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="container">
+  <div class="columns">
+    <div class="column is-9">
+      <div class="tabs is-large is-centered">
+        <ul>
+          <li [class.is-active]="currentTab ==='create'" (click)="currentTab = 'create'"><a>Create</a></li>
+          <li [class.is-active]="currentTab !=='create'" (click)="currentTab = 'view'"><a>Preview</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container vertical-padding is-flex-mobile">
+
+  <div class="columns">
+    <div class="column is-9">
+      <app-create-invoice [invoice]="invoice" [hidden]="currentTab !== 'create'"></app-create-invoice>
+      <app-view-invoice [invoice]="invoice" [hidden]="currentTab !== 'view'"></app-view-invoice>
+    </div>
+    <div class="column is-3">
+      <div class="box">
+        <h4 class="title is-4">Options</h4>
+        <hr>
+
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" [(ngModel)]="invoice.hasPurchaseOrderNo">
+              Purchase Order No
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" [(ngModel)]="invoice.hasTax">
+              Tax 
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" [(ngModel)]="invoice.hasDiscount">
+              Discount
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" [(ngModel)]="invoice.hasShipping">
+              Shipping
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" [(ngModel)]="invoice.hasPaidPartial">
+              Partially paid
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="box">
+        <h5 class="title is-5">Download Invoice</h5>
+        <p>Download a local copy of your invoice </p>
+        <hr> 
+        <button class="button is-info" (click)="downloadModalActive = true" [disabled]="!invoiceValid()">Download </button>
+      </div>
+
+      <hr>
+
+      <div class="box" *ngIf="auth.user | async">
+        <h5 class="title is-5">Send Invoice</h5>
+        <p>Send a copy of your invoice  </p>
+        <span *ngIf="uploadPercent">Uploading {{ uploadPercent | async | number:'2.2-2'}}%</span>
+        <hr> 
+        <button class="button is-info" (click)="emailModalActive = true"  [disabled]="!invoiceValid() || uploadInProgress">Save Invoice</button>
+      </div>
+
+
+      <div class="box" *ngIf="false">
+        <h5 class="title is-5">Email Invoice</h5>
+        <p>Email your invoice. </p>
+        <hr> 
+        <button class="button is-info" (click)="emailInvoice()"  [disabled]="!invoiceValid() || uploadInProgress">Email Invoice</button>
+      </div>
+
+      <div class="box" [hidden]="auth.user | async">
+        <p>Sign up to save invoices and email them directly from the app</p>
+        <button class="button is-text" [routerLink]="'/register'">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" [class.is-active]="downloadModalActive">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Help us</p>
+      <button class="delete" aria-label="close" (click)="downloadModalActive = false"></button>
+    </header>
+    <section class="modal-card-body">
+      <p>We provide these services for free and we rely on exposure to generate revenue</p>
+      <p>If you like the service Please share our site on twitter facebook and linked in. It is greatly appreciated.</p>
+      
+        <div class="fb-share-button" data-href="http://invoicer.me" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Finvoicer.me%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+      
+    </section>
+    <footer class="modal-card-foot">
+      <!-- <button class="button is-success" (click)="generate()">Download Invoice</button> -->
+      <button class="button is-success" (click)="downloadInvoiceHeadless()">Download Invoice</button>
+      <button class="button" (click)="downloadModalActive = false">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="modal" [class.is-active]="emailModalActive">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Send Your Invoice</p>
+      <button class="delete" aria-label="close" (click)="emailModalActive = false"></button>
+    </header>
+    <section class="modal-card-body">
+      <p>Send a copy of your invoice</p>
+
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Text input" name="recipientName" [(ngModel)]="invoice.senderName">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Recipient Email</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Text input" name="recipientEmail" [(ngModel)]="invoice.recipientEmail">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Message</label>
+        <div class="control">
+          <textarea class="textarea" placeholder="Textarea" name="recipientMessage" [(ngModel)]="invoice.recipientMessage"></textarea>
+        </div>
+      </div>
+
+      <span *ngIf="uploadPercent">Uploading {{ uploadPercent | async | number:'2.2-2'}}%</span>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)="uploadInvoice()" [disabled]="sendProcessing">Upload Invoice</button>
+      <button class="button" (click)="emailModalActive = false">Cancel</button>
+    </footer>
+  </div>
+</div>

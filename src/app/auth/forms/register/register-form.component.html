@@ -1,0 +1,56 @@
+<form [formGroup]="userForm"  (ngSubmit)="signup()">
+  <div class="box">
+    <h4 class="title is-4 centered">Register</h4>
+    <hr />
+    <div class="field">
+      <label class="label" for="email">Email</label>
+      <div class="control has-icons-left">
+        <input type="email" id="email" class="input is-medium" placeholder="Email" formControlName="email" required>
+        <span class="icon is-medium is-left">
+          <i class="fa fa-envelope"></i>
+        </span>
+        <div *ngIf="formErrors.email" class="notification is-danger">
+          {{ formErrors.email }}
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label" for="password">Password</label>
+      <div class="control  has-icons-left">
+        <input type="password" id="password" class="input is-medium" placeholder="Password" formControlName="password" required >
+        <span class="icon is-medium is-left">
+          <i class="fa fa-lock"></i>
+        </span>
+        <div *ngIf="formErrors.password" class="notification is-danger">
+          {{ formErrors.password }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userForm.valid" class="notification is-success">Form is valid</div>
+    <button type="submit" class="button is-info is-medium block" [disabled]="!userForm.valid">Login</button>
+    <p class="centered">Already Registered? <a routerLink="/login">Click Here</a></p>
+    <hr>
+    <h5 class="title is-5 centered">Connect With Your Social Network</h5>
+    <div class="columns">
+      <div class="column is-6" >
+        <button (click)="signInWithGoogle()" class="button btn-social btn-google is-medium block">
+          <i class="fa fa-google fa-lg"></i>Login Google
+        </button>
+      </div>
+      <div class="column is-6">
+        <button (click)="signInWithFacebook()" class="button btn-social btn-facebook is-medium block">
+          <i class="fa fa-facebook fa-lg"></i>Login Facebook
+        </button>
+      </div>
+    </div>
+    <div *ngIf="appConfig.config.authSettings.anonymousLogin">
+      <h6 class="title is-6">Anonymous Login</h6>
+      <button (click)="signInAnonymously()" class="button button-info">
+        <i class="fa fa-user-secret fa-lg"></i> Connect Anonymously
+      </button>
+    </div>
+  </div>
+</form>
+

@@ -1,0 +1,148 @@
+<div class="section" >
+  <div class="container">
+    <div *ngIf="auth.user | async; then authenticated else guest">
+          <!-- template will replace this div -->
+    </div>
+  </div>
+  
+</div>
+
+<!-- User NOT logged in -->
+<ng-template #guest class="box">
+  <h3>Howdy, GUEST</h3>
+  <p class="card-text">Login to get started...</p>
+  <button class="button" routerLink="/login">Login</button>
+</ng-template>
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  <div *ngIf="auth.user | async as user">
+    <div class="columns">
+      <div class="column is-12">
+        <h3 class="title is-3">Hello, {{ user.displayName }}</h3>
+      </div>
+    </div>
+
+     <div class="columns">
+      <div class="column is-12">
+        <p>Update your profile here.</p>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-12">
+        <H4 class="title is-4">Personal Information</H4>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-6">
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="John Doet" [(ngModel)]="user.displayName">
+          </div>
+        </div>
+      </div>
+      <div class="column is-6">
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="Text input" disabled="true" [(ngModel)]="user.email">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-12">
+        <H4 class="title is-4">Business Information</H4>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-6">
+        <div class="field">
+          <label class="label">Business Name</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="123 company llc" [(ngModel)]="user.BusinessName" >
+          </div>
+        </div>
+      </div>
+      <div class="column is-6">
+        <div class="field">
+          <label class="label">Business Phone</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="8005551234" [(ngModel)]="user.BusinessPhone" >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-6">
+        <div class="field">
+          <label class="label">Business Address</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="123 company llc" [(ngModel)]="user.BusinessAddress" >
+          </div>
+        </div>
+      </div>
+      <div class="column is-6">
+        <!-- <div class="field">
+          <label class="label">Business Address Line 2</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="8005551234" [(ngModel)]="user.BusinessPhone" >
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-6">
+        <div class="field">
+          <label class="label">City</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="West Bubble" [(ngModel)]="user.BusinessCity" >
+          </div>
+        </div>
+      </div>
+      <div class="column is-6">
+        <div class="field">
+          <label class="label">State</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="VA" [(ngModel)]="user.BusinessState" >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-6">
+        <div class="field">
+          <label class="label">Business Zipcode</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="12345" [(ngModel)]="user.BusinessZipcode" >
+          </div>
+        </div>
+      </div>
+      <div class="column is-6">
+        <div class="field">
+          <label class="label">Business Email</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="joseph@company.com" [(ngModel)]="user.BusinessEmail" >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-12">
+        <button class="button is-info" (click)="updateUser(user)">Update</button>
+      </div>
+    </div>
+
+    <img class="card-img-top" [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" width=50px>
+    <p class="text-truncate">UID: {{ user.uid }}</p>
+    <button class="button" (click)="logout()">Logout</button>
+  </div>
+</ng-template>

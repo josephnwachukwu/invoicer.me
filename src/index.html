@@ -6,8 +6,68 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+  <link rel=”canonical” href=”https://invoicer.me/” />
+
+  <meta name="description" content="Make clean concise invoices that can be sent anywhere in a single click with the invoice generator.">
+
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Invoice Generator by Invoicer">
+  <meta property="og:description" content="Make clean concise invoices that can be sent anywhere in a single click with the invoice generator.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://invoicer.me/">
+  <meta property="og:image" content="https://invoicer.me/assets/Logo.png">
+
+
+  <meta name=”robots” content=”index, follow”>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  <script src="https://js.stripe.com/v3/"></script>
+
+
 </head>
 <body>
+<!-- 
+
+   ____            _               _                     
+  / ___| ___ _ __ (_)___ _   _ ___| |_ ___ _ __ ___  ___ 
+ | |  _ / _ \ '_ \| / __| | | / __| __/ _ \ '_ ` _ \/ __|
+ | |_| |  __/ | | | \__ \ |_| \__ \ ||  __/ | | | | \__ \
+  \____|\___|_| |_|_|___/\__, |___/\__\___|_| |_| |_|___/
+                         |___/                           
+
+
+-->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=347341012450939&autoLogAppEvents=1"></script>
   <app-root></app-root>
+
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get all "navbar-burger" elements
+      var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      // Check if there are any navbar burgers
+      if ($navbarBurgers.length > 0) {
+        // Add a click event on each of them
+        $navbarBurgers.forEach(function ($el) {
+          $el.addEventListener('click', function () {
+            // Get the target from the "data-target" attribute
+            var target = $el.dataset.target;
+            var $target = document.getElementById(target);
+            // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+            $el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
+        });
+      }
+    });
+</script>
+
+
 </body>
 </html>

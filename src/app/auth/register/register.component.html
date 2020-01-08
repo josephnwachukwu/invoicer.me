@@ -1,0 +1,31 @@
+<div class="section  login-gradient">
+<div *ngIf="!(auth.user | async); else alreadyLoggedIn">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-5">
+        <register-form></register-form>
+      </div>
+    </div>
+  </div>
+  
+
+    <button *ngIf="false" (click)="signInWithTwitter()" class="button  btn-social btn-twitter" disabled>
+      <i class="fa fa-twitter fa-lg"></i> Connect Twitter
+    </button>
+
+    <button *ngIf="false" (click)="signInWithGithub()" class="button btn-social btn-github" disabled>
+      <i class="fa fa-github fa-lg"></i> Connect GitHub
+    </button> 
+
+
+    
+
+    
+
+</div>
+</div>
+<ng-template #alreadyLoggedIn>
+   You are already logged in please visit the <a href="/dashboard">dashboard</a>
+</ng-template>
+
+
