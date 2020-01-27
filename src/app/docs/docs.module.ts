@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { DocsRoutingModule } from './docs-routing.module';
+import { DocumentationComponent } from './documentation/documentation.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [DocumentationComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    DocsRoutingModule
   ]
 })
 export class DocsModule { }

@@ -14,6 +14,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage'
 
+// Material for datepicker
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material'
+
 @NgModule({
   declarations: [
   	InvoiceComponent,
@@ -26,7 +30,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage'
     RouterModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
   	InvoiceService

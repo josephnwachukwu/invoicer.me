@@ -21,6 +21,7 @@ import { DocsModule } from './docs/docs.module'
 import { HttpClientModule } from '@angular/common/http'
 
 import { FeaturesModule } from './features/features.module'
+import { PagesModule } from './pages/pages.module'
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FeaturesModule } from './features/features.module'
     DocsModule,
     InvoiceModule,
     FeaturesModule,
+    PagesModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,

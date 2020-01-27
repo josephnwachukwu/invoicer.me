@@ -164,8 +164,14 @@ export class InvoiceComponent implements OnInit {
     });
   }
 
+
   emailInvoice() {
-    return this.invoiceService.createInvoice(this.invoice);
+    this.sendProcessing = true;
+    this.invoiceService.emailInvoice(this.invoice).then((data) => {
+      console.log('data', data)
+      this.sendProcessing = false;
+      this.emailModalActive = false;
+    })
   }
 
   downloadInvoiceHeadless() {
@@ -178,7 +184,7 @@ export class InvoiceComponent implements OnInit {
     // save the invoice
     this.invoiceService.createInvoice(this.invoice).then((docRef) => {
       console.log('data', docRef.id)
-      
+
       const stamp = Date.now().toString();
       var fileName = "invoice-" + stamp + ".pdf";
       var a = document.createElement("a");
@@ -194,10 +200,13 @@ export class InvoiceComponent implements OnInit {
       });
 
     });
+  }
 
-    
-
-   
+  saveInvoice() {
+    console.log('triggered')
+    this.invoiceService.saveInvoice(this.invoice).then((data)=>{
+      console.log('data', data)
+    })
   }
 
 }

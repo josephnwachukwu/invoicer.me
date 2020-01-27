@@ -4,9 +4,6 @@
       <h1 class="title">
         <img src="assets/Logo.png" />
       </h1>
-      <!-- <h2 class="subtitle">
-        Invoice Generator
-      </h2> -->
     </div>
   </div>
 </section>
@@ -144,7 +141,6 @@
       
     </section>
     <footer class="modal-card-foot">
-      <!-- <button class="button is-success" (click)="generate()">Download Invoice</button> -->
       <button class="button is-success" (click)="downloadInvoiceHeadless()">Download Invoice</button>
       <button class="button" (click)="downloadModalActive = false">Cancel</button>
     </footer>
@@ -182,11 +178,9 @@
           <textarea class="textarea" placeholder="Textarea" name="recipientMessage" [(ngModel)]="invoice.recipientMessage"></textarea>
         </div>
       </div>
-
-      <span *ngIf="uploadPercent">Uploading {{ uploadPercent | async | number:'2.2-2'}}%</span>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success" (click)="uploadInvoice()" [disabled]="sendProcessing">Upload Invoice</button>
+      <button class="button is-success" (click)="emailInvoice()" [disabled]="sendProcessing">Upload Invoice</button>
       <button class="button" (click)="emailModalActive = false">Cancel</button>
     </footer>
   </div>
